@@ -1,0 +1,23 @@
+body {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+button {
+    width: 200px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 25px;
+    background-color: aliceblue;
+}
+
+.main {
+    background-color: aqua;
+    margin: 10px;
+    border: 5px;
+    border-color: aquamarine;
+}
+
+#game-over {
+    display: none;
+}
+
