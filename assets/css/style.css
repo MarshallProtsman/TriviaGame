@@ -1,5 +1,6 @@
 body {
     font-family: 'Nunito Sans', sans-serif;
+    
 }
 
 button {
@@ -7,17 +8,35 @@ button {
     height: 50px;
     margin: 10px;
     border-radius: 25px;
-    background-color: aliceblue;
+    background-color: #5F9BCD;
 }
 
 .main {
-    background-color: aqua;
-    margin: 10px;
+    background-color: rgb(182, 182, 182);
+    margin: px;
     border: 5px;
-    border-color: aquamarine;
+    background-color: #E9E2D7;
 }
 
 #game-over {
     display: none;
 }
 
+.body-ext {
+    margin: 10%;
+    background-color: #FFD1C3;
+}
+
+.question {
+    margin-top: 20px;
+}
+
+#timer {
+    font-size: 30px;
+    background-color: #CFE7F4;
+}
+
+#game-over {
+    font-size: 100px;
+    color: red;
+}
