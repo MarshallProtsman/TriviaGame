@@ -1,39 +1,42 @@
-
 // making constants
 const quizContainer = document.getElementById("quiz");
 const resultsContainer = document.getElementById("results");
 const submitButton = document.getElementById("submit");
-const gameOver = document.getElementById("game-over")
+const resetButton = document.getElementById("reset");
+const gameOver = document.getElementById("game-over");
+
+//Set allowed quiz time here (unit = minutes)
+const quizTime = 0.5;
 
 //create a timer function
 function startTimer(duration, display) {
-    //the timer is equal to the duration
+  //the timer is equal to the duration
   var timer = duration,
     minutes,
     seconds;
-    //
+  //
   setInterval(function() {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
-// If the minutes or seconds value is one digit, add a "0" before
+    // If the minutes or seconds value is one digit, add a "0" before
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
     //display it
     `<div class='time2'>
-    ${display.textContent = minutes + ":" + seconds}
-    </div>`
-
+    ${(display.textContent = minutes + ":" + seconds)}
+    </div>`;
+    
     // what to do if the timer hits zero
     if (--timer < 0) {
-      timer = duration;
+      timer = "";
       //stop displaying the quiz body
-      quizContainer.style.display = 'none';
+      quizContainer.style.display = "none";
       console.log("Quiz over");
       //stop displaying the submit button
-      submitButton.style.display = 'none;'
+      submitButton.style.display = "none;";
       // show the game over text
-      gameOver.style.display = 'inline';
+      gameOver.style.display = "inline";
       showResults();
     }
   }, 1000);
@@ -43,16 +46,17 @@ function startIt(x) {
     display = document.querySelector("#timer");
   startTimer(Minute * x, display);
   console.log(parseInt((Minute * x) / 60) + ":00");
-//   startTimer.style.display = "none";
+  //   startTimer.style.display = "none";
 }
 
+
 //Calls the timer and passes the ammount of time
-startIt(.1);
+startIt(quizTime);
 
 // ALL MY QUESTIONS AND ANSWERS IN AN ARRAY
 const myQuestions = [
   {
-    question: "How many ounces are in a cappucino?",
+    question: "How many ounces are in a traditional cappucino?",
     answers: {
       a: "10 ounces",
       b: "6 ounces",
@@ -62,46 +66,45 @@ const myQuestions = [
     correctAnswer: "c"
   },
   {
-    question: "What is my favorite drink?",
+    question: "Which country is the largest producer of coffee?",
     answers: {
-      a: "americano",
-      b: "iced latte",
-      c: "caramel macchiato"
+      a: "Brazil",
+      b: "Ethiopia",
+      c: "Columbia"
     },
     correctAnswer: "a"
   },
   {
-    question: "How do you do?",
+    question: "What are coffee beans technically?",
     answers: {
-      a: "good",
-      b: "bad",
-      c: "okay"
+      a: "Fruits",
+      b: "Beans, duh...",
+      c: "Seeds"
     },
     correctAnswer: "c"
   },
   {
-      question: "How old is Stanley?",
-        answers: {
-            a: '31',
-            b: '46',
-            c: '18'
-        },
-        correctAnswer: 'c'
+    question: "What does espresso mean in Italian?",
+    answers: {
+      a: '"express" ',
+      b: '"quickly" ',
+      c: '"Pressed out" '
+    },
+    correctAnswer: "c"
   }
 ];
 
 // a function to make a quiz. Called back to at the end
 function buildQuiz() {
-
-    //creating an array
+  //creating an array
   const output = [];
 
   // loop that for each object in the array of q/a stuff, assigns it as current question and question number
   myQuestions.forEach((currentQuestion, questionNumber) => {
-      // create an array to contain answers
+    // create an array to contain answers
     const answers = [];
     for (letter in currentQuestion.answers) {
-        //pushes the 
+      //pushes the
       answers.push(
         `<label>
             <input type="radio" name="question${questionNumber}"
@@ -133,7 +136,7 @@ function showResults() {
     if (userAnswer === currentQuestion.correctAnswer) {
       numCorrect++;
 
-      answerContainers[questionNumber].style.color = "lightblue";
+      answerContainers[questionNumber].style.color = "#609BCD";
     } else {
       answerContainers[questionNumber].style.color = "red";
     }
@@ -144,8 +147,15 @@ function showResults() {
 }
 
 buildQuiz();
-submitButton.addEventListener("click", function(){
-showResults()
-submitButton.style.display = "none";
+submitButton.addEventListener("click", function() {
+  showResults();
+  submitButton.style.display = "none";
 });
-
+resetButton.addEventListener("click", function() {
+  buildQuiz();
+  submitButton.style.display = "inline";
+  quizContainer.style.display = "inline";
+  startTimer();
+  startIt();
+  startIt(quizTime);
+});

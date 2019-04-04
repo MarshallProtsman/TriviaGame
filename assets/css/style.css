@@ -11,6 +11,11 @@ button {
     background-color: #5F9BCD;
 }
 
+#title {
+    font-size: 50px;
+    color: rgb(19, 32, 43);
+}
+
 .main {
     background-color: rgb(182, 182, 182);
     margin: px;
